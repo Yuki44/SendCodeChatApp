@@ -3,14 +3,12 @@ package com.houseof.code.models;
 public class Chatroom {
     private String chatName;
     private String chatDescription;
-    private String chatIcon;
-    private String chatCreatedDate;
+    private String chatPhoto;
 
-    public Chatroom(String chatName, String chatDescription, String chatIcon, String chatCreatedDate) {
+    public Chatroom(String chatName, String chatDescription, String chatPhoto) {
         this.chatName = chatName;
         this.chatDescription = chatDescription;
-        this.chatIcon = chatIcon;
-        this.chatCreatedDate = chatCreatedDate;
+        this.chatPhoto = chatPhoto;
     }
 
     public Chatroom() {
@@ -32,29 +30,21 @@ public class Chatroom {
         this.chatDescription = chatDescription;
     }
 
-    public String getChatIcon() {
-        return chatIcon;
+    public String getchatPhoto() {
+        return chatPhoto;
     }
 
-    public void setChatIcon(String chatIcon) {
-        this.chatIcon = chatIcon;
+    public void setchatPhoto(String chatPhoto) {
+        this.chatPhoto = chatPhoto;
     }
 
-    public String getChatCreatedDate() {
-        return chatCreatedDate;
-    }
-
-    public void setChatCreatedDate(String chatCreatedDate) {
-        this.chatCreatedDate = chatCreatedDate;
-    }
 
     @Override
     public String toString() {
         return "Chatroom{" +
                 "chatName='" + chatName + '\'' +
                 ", chatDescription='" + chatDescription + '\'' +
-                ", chatIcon='" + chatIcon + '\'' +
-                ", chatCreatedDate='" + chatCreatedDate + '\'' +
+                ", chatPhoto='" + chatPhoto + '\'' +
                 '}';
     }
 }
