@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">SendCode</string>
+    <string name="app_name">Send Code</string>
     <string name="click_to_open_messages">Click to open messages</string>
+    <string name="send_code">Send Code</string>
 </resources>
