@@ -1,50 +1,50 @@
 package com.houseof.code.models;
 
 public class Chatroom {
-    private String chatName;
-    private String chatDescription;
-    private String chatPhoto;
+    private String chatroomTitle;
+    private String chatroomDescription;
+    private String chatroomPhoto;
 
-    public Chatroom(String chatName, String chatDescription, String chatPhoto) {
-        this.chatName = chatName;
-        this.chatDescription = chatDescription;
-        this.chatPhoto = chatPhoto;
+    public Chatroom(String chatroomTitle, String chatroomDescription, String chatroomPhoto) {
+        this.chatroomTitle = chatroomTitle;
+        this.chatroomDescription = chatroomDescription;
+        this.chatroomPhoto = chatroomPhoto;
     }
 
     public Chatroom() {
     }
 
-    public String getChatName() {
-        return chatName;
+    public String getChatroomTitle() {
+        return chatroomTitle;
     }
 
-    public void setChatName(String chatName) {
-        this.chatName = chatName;
+    public void setChatroomTitle(String chatroomTitle) {
+        this.chatroomTitle = chatroomTitle;
     }
 
-    public String getChatDescription() {
-        return chatDescription;
+    public String getChatroomDescription() {
+        return chatroomDescription;
     }
 
-    public void setChatDescription(String chatDescription) {
-        this.chatDescription = chatDescription;
+    public void setChatroomDescription(String chatroomDescription) {
+        this.chatroomDescription = chatroomDescription;
     }
 
-    public String getchatPhoto() {
-        return chatPhoto;
+    public String getChatroomPhoto() {
+        return chatroomPhoto;
     }
 
-    public void setchatPhoto(String chatPhoto) {
-        this.chatPhoto = chatPhoto;
+    public void setChatroomPhoto(String chatroomPhoto) {
+        this.chatroomPhoto = chatroomPhoto;
     }
 
 
     @Override
     public String toString() {
         return "Chatroom{" +
-                "chatName='" + chatName + '\'' +
-                ", chatDescription='" + chatDescription + '\'' +
-                ", chatPhoto='" + chatPhoto + '\'' +
+                "chatroomTitle='" + chatroomTitle + '\'' +
+                ", chatroomDescription='" + chatroomDescription + '\'' +
+                ", chatroomPhoto='" + chatroomPhoto + '\'' +
                 '}';
     }
 }

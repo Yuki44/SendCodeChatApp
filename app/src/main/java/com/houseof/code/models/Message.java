@@ -3,13 +3,13 @@ package com.houseof.code.models;
 public class Message {
     private String messageText;
     private String messageSender;
-    private String timestamp;
+    private String messageTimestamp;
     private String senderAvatar;
 
-    public Message(String messageText, String messageSender, String timestamp, String senderAvatar) {
+    public Message(String messageText, String messageSender, String messageTimestamp, String senderAvatar) {
         this.messageText = messageText;
         this.messageSender = messageSender;
-        this.timestamp = timestamp;
+        this.messageTimestamp = messageTimestamp;
         this.senderAvatar = senderAvatar;
     }
 
@@ -32,12 +32,12 @@ public class Message {
         this.messageSender = messageSender;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public String getMessageTimestamp() {
+        return messageTimestamp;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setMessageTimestamp(String messageTimestamp) {
+        this.messageTimestamp = messageTimestamp;
     }
 
     public String getSenderAvatar() {
@@ -53,7 +53,7 @@ public class Message {
         return "Message{" +
                 "messageText='" + messageText + '\'' +
                 ", messageSender='" + messageSender + '\'' +
-                ", timestamp='" + timestamp + '\'' +
+                ", messageTimestamp='" + messageTimestamp + '\'' +
                 ", senderAvatar='" + senderAvatar + '\'' +
                 '}';
     }
