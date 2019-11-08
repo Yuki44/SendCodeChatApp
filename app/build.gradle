@@ -51,6 +51,15 @@ dependencies {
 
     //Firebase UI
     implementation 'com.firebaseui:firebase-ui-auth:6.0.2'
+
+    //Firebase FCM
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+
+    //Firestore
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 apply plugin: 'com.google.gms.google-services'
