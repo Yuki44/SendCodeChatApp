@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Send Code</string>
+    <string name="app_name" translatable="false">Send Code</string>
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">2545026675575747</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb2545026675575747</string>
     <string name="click_to_open_messages">Click to open messages</string>
     <string name="send_code">Send Code</string>
+    <string name="signed_in">Signed In</string>
+    <string name="sign_in_cancelled">The sign in was cancelled</string>
+    <string name="no_internet_connection">No internet connection available</string>
+    <string name="unknown_error">An unknown error has occurred</string>
+
 </resources>
