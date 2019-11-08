@@ -16,16 +16,19 @@ import java.util.ArrayList;
 public class ChatroomsRecyclerAdapter extends RecyclerView.Adapter<ChatroomsRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Chatroom> mChatrooms = new ArrayList<>();
+    private OnChatroomListener mOnChatroomListener;
 
-    public ChatroomsRecyclerAdapter(ArrayList<Chatroom> chatrooms) {
+    public ChatroomsRecyclerAdapter(ArrayList<Chatroom> chatrooms, OnChatroomListener onChatroomListener) {
+
         this.mChatrooms = chatrooms;
+        this.mOnChatroomListener = onChatroomListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_chatroom_list_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mOnChatroomListener);
     }
 
     @Override
@@ -39,13 +42,26 @@ public class ChatroomsRecyclerAdapter extends RecyclerView.Adapter<ChatroomsRecy
         return mChatrooms.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
        TextView chatroomTitle, chatroomDescription;
+       OnChatroomListener onChatroomListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnChatroomListener onChatroomListener) {
             super(itemView);
             chatroomTitle = itemView.findViewById(R.id.chatroom_title);
             chatroomDescription = itemView.findViewById(R.id.chatroom_description);
+            this.onChatroomListener = onChatroomListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onChatroomListener.onChatroomClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnChatroomListener{
+        void onChatroomClick(int position);
     }
 }

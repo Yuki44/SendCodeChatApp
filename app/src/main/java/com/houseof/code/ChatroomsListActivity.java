@@ -2,6 +2,7 @@ package com.houseof.code;
 
 import android.os.Bundle;
 import android.transition.Fade;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import com.houseof.code.util.VerticalSpacingItemDecorator;
 
 import java.util.ArrayList;
 
-public class ChatroomsListActivity extends AppCompatActivity {
+public class ChatroomsListActivity extends AppCompatActivity implements ChatroomsRecyclerAdapter.OnChatroomListener {
 
     private static final String TAG = "ChatroomsListActivity";
 
@@ -51,7 +52,14 @@ public class ChatroomsListActivity extends AppCompatActivity {
         mRecyclerViewWidget.setLayoutManager(linearLayoutManager);
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(5);
         mRecyclerViewWidget.addItemDecoration(itemDecorator);
-        mChatroomsRecyclerAdapter = new ChatroomsRecyclerAdapter(mChatrooms);
+        mChatroomsRecyclerAdapter = new ChatroomsRecyclerAdapter(mChatrooms, this);
         mRecyclerViewWidget.setAdapter(mChatroomsRecyclerAdapter);
+    }
+
+    @Override
+    public void onChatroomClick(int position) {
+        //Intent intent = new Intent(this, NewActivity.class);
+        //startActivity(intent);
+        Log.d(TAG, "onChatroomClick: clicked");
     }
 }
