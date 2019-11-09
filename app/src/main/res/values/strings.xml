@@ -20,5 +20,7 @@
     <string name="type_a_message">Type a message</string>
     <string name="camera_icon">camera icon</string>
     <string name="log_out">Log out</string>
+    <string name="send_message_button">Send Message Button</string>
+    <string name="add_image_button">Add Image Button</string>
 
 </resources>
