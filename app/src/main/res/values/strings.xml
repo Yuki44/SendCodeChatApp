@@ -9,5 +9,15 @@
     <string name="sign_in_cancelled">The sign in was cancelled</string>
     <string name="no_internet_connection">No internet connection available</string>
     <string name="unknown_error">An unknown error has occurred</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="unsubscribe_from_this_chat">Unsubscribe from this chat</string>
+    <string name="subscribe_to_chat">Yes, subscribe!</string>
+    <string name="cancel">Cancel, go back</string>
+    <string name="back_arrow">back arrow</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="camera_icon">camera icon</string>
 
 </resources>
