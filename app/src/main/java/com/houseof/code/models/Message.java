@@ -1,20 +1,26 @@
 package com.houseof.code.models;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
+
 public class Message {
     private String messageText;
     private String messageSender;
-    private String messageTimestamp;
+    private @ServerTimestamp Long messageTimestamp;
     private String senderAvatar;
 
-    public Message(String messageText, String messageSender, String messageTimestamp, String senderAvatar) {
+    public Message() {
+    }
+
+    public Message(String messageText, String messageSender, Long messageTimestamp, String senderAvatar) {
         this.messageText = messageText;
         this.messageSender = messageSender;
         this.messageTimestamp = messageTimestamp;
         this.senderAvatar = senderAvatar;
     }
 
-    public Message() {
-    }
+    /* GETTER SETTER */
 
     public String getMessageText() {
         return messageText;
@@ -32,11 +38,11 @@ public class Message {
         this.messageSender = messageSender;
     }
 
-    public String getMessageTimestamp() {
+    public Long getMessageTimestamp() {
         return messageTimestamp;
     }
 
-    public void setMessageTimestamp(String messageTimestamp) {
+    public void setMessageTimestamp(Long messageTimestamp) {
         this.messageTimestamp = messageTimestamp;
     }
 
@@ -48,12 +54,14 @@ public class Message {
         this.senderAvatar = senderAvatar;
     }
 
+    /* TO STRING */
+
     @Override
     public String toString() {
         return "Message{" +
                 "messageText='" + messageText + '\'' +
                 ", messageSender='" + messageSender + '\'' +
-                ", messageTimestamp='" + messageTimestamp + '\'' +
+                ", messageTimestamp=" + messageTimestamp +
                 ", senderAvatar='" + senderAvatar + '\'' +
                 '}';
     }
