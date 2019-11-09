@@ -11,14 +11,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.houseof.code.dal.DatabaseHelper;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity  {
 
     private static final int RC_SIGN_IN = 123;
     private static final String TAG = "LoginActivity";
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
 
 
     @Override
@@ -27,6 +32,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         createSignInIntent();
+    }
+
+
+    public LoginActivity() {
     }
 
     public void createSignInIntent() {
@@ -58,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 showToast(R.string.signed_in);
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser user = auth.getCurrentUser();
+                databaseHelper.createNewUser(user.getDisplayName(), user.getPhotoUrl().toString(), user.getUid());
                 Intent intent = new Intent(this, ChatroomsListActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -81,8 +93,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
     private void showToast(@StringRes int errorMessageRes) {
         Toast.makeText(getBaseContext(),  errorMessageRes, Toast.LENGTH_SHORT).show();
     }
+
 
 }
