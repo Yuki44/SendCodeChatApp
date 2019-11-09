@@ -55,10 +55,8 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatrooms_list);
-        mRecyclerViewWidget = findViewById(R.id.recyclerViewChatrooms);
-
-        checkIfAuthenticated();
         findUiComponents();
+        checkIfAuthenticated();
         initRecyclerView();
         loadProfileImage();
         loadChatrooms();
@@ -72,15 +70,7 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
         });
     }
 
-    private void checkIfAuthenticated() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser == null){
-            Intent startIntent = new Intent(this, SplashScreenActivity.class);
-            startActivity(startIntent);
-            finish();
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        }
-    }
+    /* INIT */
 
     private void findUiComponents() {
         mRecyclerViewWidget = findViewById(R.id.recyclerViewChatrooms);
@@ -100,19 +90,24 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
         mRecyclerViewWidget.setAdapter(mChatroomsRecyclerAdapter);
     }
 
-    @Override
-    public void onChatroomClick(int position) {
-        Intent intent = new Intent(this, ChatroomActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        Log.d(TAG, "onChatroomClick: clicked");
-    }
+
+    /* GET METHODS */
 
     private void loadProfileImage() {
         String imageUrl = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhotoUrl().toString();
         Picasso.get().load(imageUrl)
                 .error(R.drawable.ic_user_no_photo)
                 .into(mImageView);
+    }
+
+    private void checkIfAuthenticated() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser == null){
+            Intent startIntent = new Intent(this, SplashScreenActivity.class);
+            startActivity(startIntent);
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
     }
 
     private void loadChatrooms() {
@@ -151,6 +146,8 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
         });
     }
 
+    /* OVERRIDE */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        super.onCreateOptionsMenu(menu);
@@ -164,9 +161,19 @@ getMenuInflater().inflate(R.menu.menu_logout, menu);
 if(item.getItemId() == R.id.menuitem_logout){
     FirebaseAuth.getInstance().signOut();
     checkIfAuthenticated();
-}
-        return true;
+} return true;
     }
+
+    @Override
+    public void onChatroomClick(int position) {
+        Intent intent = new Intent(this, ChatroomActivity.class);
+        intent.putExtra("selected_chat", mChatrooms.get(position));
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        Log.d(TAG, "onChatroomClick: clicked");
+    }
+
+/* TESTING METHODS */
 
     /*  private void insertFakeChatrooms(){
         for (int i = 0; i < 1000; i++) {
