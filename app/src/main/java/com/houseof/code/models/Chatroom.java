@@ -1,6 +1,9 @@
 package com.houseof.code.models;
 
-public class Chatroom {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Chatroom implements Parcelable {
     private String chatroomTitle;
     private String chatroomDescription;
     private String chatroomPhoto;
@@ -13,6 +16,9 @@ public class Chatroom {
 
     public Chatroom() {
     }
+
+
+   /* GETTER SETTER */
 
     public String getChatroomTitle() {
         return chatroomTitle;
@@ -38,6 +44,7 @@ public class Chatroom {
         this.chatroomPhoto = chatroomPhoto;
     }
 
+/* TO STRING */
 
     @Override
     public String toString() {
@@ -46,5 +53,37 @@ public class Chatroom {
                 ", chatroomDescription='" + chatroomDescription + '\'' +
                 ", chatroomPhoto='" + chatroomPhoto + '\'' +
                 '}';
+    }
+
+    /* PARCELABLE IMPLEMENTATION */
+
+    protected Chatroom(Parcel in) {
+        chatroomTitle = in.readString();
+        chatroomDescription = in.readString();
+        chatroomPhoto = in.readString();
+    }
+
+    public static final Creator<Chatroom> CREATOR = new Creator<Chatroom>() {
+        @Override
+        public Chatroom createFromParcel(Parcel in) {
+            return new Chatroom(in);
+        }
+
+        @Override
+        public Chatroom[] newArray(int size) {
+            return new Chatroom[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(chatroomTitle);
+        dest.writeString(chatroomDescription);
+        dest.writeString(chatroomPhoto);
     }
 }
