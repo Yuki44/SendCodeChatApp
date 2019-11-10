@@ -1,6 +1,7 @@
 package com.houseof.code.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,96 +18,74 @@ import com.houseof.code.models.Message;
 import com.houseof.code.util.GetTimeAgo;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MessagesRecyclerAdapter extends RecyclerView.Adapter<MessagesRecyclerAdapter.ViewHolder> {
 
-    public static  final int MSG_TYPE_LEFT = 0;
-    public static  final int MSG_TYPE_RIGHT = 1;
-    private ArrayList<Message> mMessages = new ArrayList<>();
-    private Context mContext;
-    private String mUserAvatar;
-    private OnMessageListener mOnMessageListener;
-    FirebaseUser fuser;
+    private static final String TAG = "MessagesRecyclerAdapter";
+    private static  final int MSG_TYPE_LEFT = 0;
+    private static  final int MSG_TYPE_RIGHT = 1;
+    private List<Message> mMessages;
 
-    public MessagesRecyclerAdapter(ArrayList<Message> messages, Context context, String userAvatar, OnMessageListener onMessageListener) {
+    public MessagesRecyclerAdapter(List<Message> messages) {
         this.mMessages = messages;
-        this.mContext = context;
-        this.mUserAvatar = userAvatar;
-        this.mOnMessageListener = onMessageListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == MSG_TYPE_RIGHT) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_chat_item_right, parent, false);
-            return new ViewHolder(view, mOnMessageListener);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_chat_item_right, parent, false);
+            return new ViewHolder(view);
         } else {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_chat_item_left, parent, false);
-            return new ViewHolder(view, mOnMessageListener);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_chat_item_left, parent, false);
+            return new ViewHolder(view);
         }
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.show_message.setText(mMessages.get(position).getMessageText());
-        Picasso.get().load(mUserAvatar).error(R.drawable.ic_user_no_photo).into(holder.user_avatar);
-        String timestamp = GetTimeAgo.getTimeAgo(mMessages.get(position).getMessageTimestamp(), mContext);
+        Message message = mMessages.get(position);
+        holder.show_message.setText(message.getMessageText());
+        holder.show_username.setText(message.getMessageUsername());
+        Picasso.get().load(message.getSenderAvatar())
+                .error(R.drawable.ic_user_no_photo).into(holder.user_avatar);
+        if(message.getMessageTimestamp() != null){
+        String timestamp = GetTimeAgo.getTimeAgo(message.getMessageTimestamp().getTime());
         holder.message_timestamp.setText(timestamp);
+        }
     }
-
 
     @Override
     public int getItemCount() {
         return mMessages.size();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView show_message;
+        TextView show_username;
         ImageView user_avatar;
         TextView message_timestamp;
-        OnMessageListener onMessageListener;
 
-        public ViewHolder(@NonNull View itemView, OnMessageListener onMessageListener) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             show_message = itemView.findViewById(R.id.show_message);
+            show_username = itemView.findViewById(R.id.show_username);
             user_avatar = itemView.findViewById(R.id.user_avatar);
             message_timestamp = itemView.findViewById(R.id.message_timestamp);
-            this.onMessageListener = onMessageListener;
-
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            onMessageListener.onMessageClick(getAdapterPosition());
-        }
     }
 
-    public interface OnMessageListener{
-        void onMessageClick(int position);
-    }
         @Override
         public int getItemViewType(int position) {
-            fuser = FirebaseAuth.getInstance().getCurrentUser();
-            if (mMessages.get(position).getMessageSender().equals(fuser.getUid())){
-                return MSG_TYPE_RIGHT;
-            } else {
-                return MSG_TYPE_LEFT;
-            }
+            FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (mMessages.get(position).getMessageSender().equals(mCurrentUser.getUid())) {
+                    return MSG_TYPE_RIGHT;
+                } else {
+                    return MSG_TYPE_LEFT;
+                }
         }
 
 
 }
-
-
-
-
-
-
-
-
-
