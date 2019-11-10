@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.houseof.code.R;
 import com.houseof.code.models.Chatroom;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChatroomsRecyclerAdapter extends RecyclerView.Adapter<ChatroomsRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<Chatroom> mChatrooms = new ArrayList<>();
+    private List<Chatroom> mChatrooms;
     private OnChatroomListener mOnChatroomListener;
 
-    public ChatroomsRecyclerAdapter(ArrayList<Chatroom> chatrooms, OnChatroomListener onChatroomListener) {
 
+    public ChatroomsRecyclerAdapter(List<Chatroom> chatrooms, OnChatroomListener onChatroomListener) {
         this.mChatrooms = chatrooms;
         this.mOnChatroomListener = onChatroomListener;
     }
@@ -40,6 +40,10 @@ public class ChatroomsRecyclerAdapter extends RecyclerView.Adapter<ChatroomsRecy
     @Override
     public int getItemCount() {
         return mChatrooms.size();
+    }
+
+    public void setData(List<Chatroom> chatrooms) {
+        mChatrooms = chatrooms;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
