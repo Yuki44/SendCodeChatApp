@@ -8,17 +8,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.houseof.code.models.Chatroom;
+import com.houseof.code.models.Message;
 import com.houseof.code.models.User;
 
-import java.util.ArrayList;
-
-public class DatabaseHelper {
+public class DatabaseHelper  {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "DatabaseHelper";
@@ -33,19 +27,28 @@ public class DatabaseHelper {
         user.setUserAvatar(userAvatar);
         user.setUserId(userId);
 
-        userCollectionRef.document(userId).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.d(TAG, "onComplete: Success");
-                }else {
-                    Log.d(TAG, "onComplete: Failed");
-                }
+        userCollectionRef.document(userId).set(user).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Log.d(TAG, "onComplete: Success");
+            }else {
+                Log.d(TAG, "onComplete: Failed");
             }
         });
-
     }
 
 
-
+    public void createNewMessage(Message message, String documentId) {
+        DocumentReference messageColRef =  db.collection("chatrooms").document(documentId).collection("messages").document();
+        message.setMessageId(messageColRef.getId());
+        messageColRef.set(message).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d(TAG, "onComplete: MESSAGE SENT");
+                } else {
+                    Log.d(TAG, "onComplete: MESSAGE FAILED");
+                }
+            }
+        });
+    }
 }
