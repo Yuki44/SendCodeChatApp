@@ -188,8 +188,10 @@ if(item.getItemId() == R.id.menuitem_logout){
 
     @Override
     public void onChatroomClick(int position) {
+        Bundle b = new Bundle();
+        b.putParcelable("selected_chat", mChatrooms.get(position));
         Intent intent = new Intent(this, ChatroomActivity.class);
-        intent.putExtra("selected_chat", mChatrooms.get(position));
+        intent.putExtra("bundle", b);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         Log.d(TAG, "onChatroomClick: clicked");
