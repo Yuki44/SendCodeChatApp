@@ -12,13 +12,6 @@
         android:id="@+id/chat_app_bar"
         layout="@layout/snippet_toolbar_chat"
         />
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/message_swipe_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/chat_app_bar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messages_list"
@@ -30,7 +23,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +40,8 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:contentDescription="@string/add_image_button"
-            android:padding="10dp"
+            android:padding="13dp"
+            android:scaleType="center"
             android:src="@drawable/ic_add_photo" />
 
         <EditText
@@ -65,7 +58,8 @@
             android:paddingLeft="10dp"
             android:paddingTop="14dp"
             android:paddingRight="10dp"
-            android:paddingBottom="12dp"/>
+            android:paddingBottom="12dp"
+            android:imeOptions="flagNoExtractUi"/>
 
         <ImageButton
             android:id="@+id/chat_send_bttn"
@@ -74,8 +68,10 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:contentDescription="@string/send_message_button"
-            android:padding="10dp"
-            android:src="@drawable/ic_send_message" />
+            android:padding="13dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_send_message"
+            android:tint="@color/orange" />
 
 
     </LinearLayout>
