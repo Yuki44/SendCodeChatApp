@@ -22,5 +22,12 @@
     <string name="log_out">Log out</string>
     <string name="send_message_button">Send Message Button</string>
     <string name="add_image_button">Add Image Button</string>
+    <string name="added">added</string>
+    <string name="modified">modified</string>
+    <string name="removed">removed</string>
+    <string name="chatroom_id" />
+    <string name="choose_photo">Choose a photo</string>
+    <string name="take_a_new_photo">Take a photo</string>
+    <string name="photo_dialog">Photo dialog</string>
 
 </resources>
