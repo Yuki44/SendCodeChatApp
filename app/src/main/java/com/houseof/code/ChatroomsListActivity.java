@@ -20,7 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,6 +32,7 @@ import com.houseof.code.util.VerticalSpacingItemDecorator;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -59,11 +62,10 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
         checkIfAuthenticated();
         initRecyclerView();
         loadProfileImage();
-        loadChatrooms();
+        startListeningForChatrooms();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadChatrooms();
                 mChatroomsRecyclerAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -84,6 +86,7 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerViewWidget.setLayoutManager(linearLayoutManager);
+        mRecyclerViewWidget.setHasFixedSize(true);
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(5);
         mRecyclerViewWidget.addItemDecoration(itemDecorator);
         mChatroomsRecyclerAdapter = new ChatroomsRecyclerAdapter(mChatrooms, this);
@@ -145,6 +148,25 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
             }
         });
     }
+
+    private void startListeningForChatrooms(){
+        loadChatrooms();
+        db.collection("chatrooms").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if(e != null) {
+                            Log.d(TAG, "onEvent: An error has ocurred");
+                        }else {
+                            List<Chatroom> messages = snapshots.toObjects(Chatroom.class);
+                            mChatroomsRecyclerAdapter.setData(messages);
+                            mRecyclerViewWidget.smoothScrollToPosition(mChatroomsRecyclerAdapter.getItemCount());
+
+                        }
+                    }
+                });
+    }
+
 
     /* OVERRIDE */
 
