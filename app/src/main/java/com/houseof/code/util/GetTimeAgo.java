@@ -2,16 +2,27 @@ package com.houseof.code.util;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
+
+import com.houseof.code.models.Message;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class GetTimeAgo extends Application{
-
+    private static final String TAG = "GetTimeAgo";
     private static final int SECOND_MILLIS = 1000;
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
 
-    public static String getTimeAgo(long time, Context ctx) {
+    public static String getTimeAgo(long time) {
+
+
         if (time < 1000000000000L) {
             // if timestamp given in seconds, convert to millis
             time *= 1000;
@@ -39,5 +50,6 @@ public class GetTimeAgo extends Application{
             return diff / DAY_MILLIS + " days ago";
         }
     }
+
 
 }
