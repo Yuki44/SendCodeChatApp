@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-   >
+    android:padding="4dp" >
 
     <RelativeLayout
         android:layout_width="300dp"
@@ -15,7 +14,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/profile_image"
+            android:id="@+id/user_avatar"
             android:visibility="gone"/>
 
         <TextView
@@ -33,8 +32,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/message_timestamp"
+            android:layout_marginTop="-2dp"
             android:layout_below="@id/show_message"
             android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_username"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
