@@ -1,15 +1,33 @@
 # Send Code Chat App
 
-Android (Java) simple chat application based on firebase. This simple chat app includes Google and Facebook authentication, the possibility to join and create chat rooms.
+Simple android chat application based on firebase. It includes Google and Facebook authentication, and the possibility to create and join chat rooms with friends, family or colleagues.
 
 Includes:
-Splash Screen
-Login Screen
-Push Functionality
-Chatrooms & the ability to send and receive messages from authenticated users
+- Splash Screen
+- Login Screen
+- Chatrooms & the ability to send and receive messages from authenticated users
+- SOON: Push functionality
+
+## Start
+
+I have deleted google-services.json.
+
+> Make a firebase app on the firebase console app
+
+> Change Authorization key with your key for firebase project
+
+> To start working with this project add your Google services json
 
 
-# Target Version
 
-Minimum version Android 5.0 (Lollipop)
-Currently targeting Android 10 (Q)
+## Demo
+
+Photos / GIF very soon
+
+## Target Version
+
+- Minimum version Android 5.0 (Lollipop)
+- Currently targeting Android 10 (Q)
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
