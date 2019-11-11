@@ -4,7 +4,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
 import com.houseof.code.view_model.MessageListViewModel;
 
 import static com.houseof.code.interfaces.IConstants.LIMIT;
@@ -13,6 +12,8 @@ import static com.houseof.code.interfaces.IConstants.MESSAGE_TIMESTAMP_PROPERTY;
 
 public class FirestoreMessageListRepositoryCallback implements MessageListViewModel.MessageListRepository,
         MessageListLiveData.OnLastVisibleMessageCallback, MessageListLiveData.OnLastMessageReachedCallback {
+
+    private static final String TAG = "FirestoreRepo ";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String id = "qbj4FdbaBmKXaiHiPqOt";
     private DocumentSnapshot lastVisibleMessage;
@@ -23,10 +24,10 @@ public class FirestoreMessageListRepositoryCallback implements MessageListViewMo
     @Override
     public MessageListLiveData getMessageListLiveData() {
 
-        if(isLastMessageReached){
-        return null;
+        if (isLastMessageReached) {
+            return null;
         }
-        if(lastVisibleMessage != null){
+        if (lastVisibleMessage != null) {
             query = query.startAfter(lastVisibleMessage);
         }
         return new MessageListLiveData(query, this, this);
@@ -39,7 +40,7 @@ public class FirestoreMessageListRepositoryCallback implements MessageListViewMo
 
     @Override
     public void setLastMessageReached(boolean isLastMessageReached) {
-this.isLastMessageReached = isLastMessageReached;
+        this.isLastMessageReached = isLastMessageReached;
     }
 
 }

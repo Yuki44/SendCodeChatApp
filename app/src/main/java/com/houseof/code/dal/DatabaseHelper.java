@@ -1,7 +1,6 @@
 package com.houseof.code.dal;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,9 +13,8 @@ import com.houseof.code.models.User;
 
 public class DatabaseHelper  {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "DatabaseHelper";
-    private Boolean mUserIdExists;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void createNewUser(String username, String userAvatar, String userId) {
 
@@ -36,10 +34,11 @@ public class DatabaseHelper  {
         });
     }
 
-
     public void createNewMessage(Message message, String documentId) {
+
         DocumentReference messageColRef =  db.collection("chatrooms").document(documentId).collection("messages").document();
         message.setMessageId(messageColRef.getId());
+
         messageColRef.set(message).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
