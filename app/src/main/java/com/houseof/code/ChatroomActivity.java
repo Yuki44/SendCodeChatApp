@@ -89,7 +89,7 @@ public class ChatroomActivity extends AppCompatActivity {
 
     
     /* INIT */
-
+    //Retrieve chatroom from previous activity
     private void getParcelable() {
         if (getIntent().getBundleExtra("bundle") != null) {
             Bundle b = getIntent().getBundleExtra("bundle");
@@ -169,7 +169,7 @@ public class ChatroomActivity extends AppCompatActivity {
     private void modifyMessage(Message modifiedMessage) {
         for (int i = 0; i < mMessageList.size(); i++) {
             Message currentMessage = mMessageList.get(i);
-            if (currentMessage.messageId.equals(modifiedMessage.messageId)) {
+            if (currentMessage.getMessageId().equals(modifiedMessage.getMessageId())) {
                 mMessageList.remove(currentMessage);
                 mMessageList.add(i, modifiedMessage);
             }
@@ -179,7 +179,7 @@ public class ChatroomActivity extends AppCompatActivity {
     private void removeMessage(Message removedMessage) {
         for (int i = 0; i < mMessageList.size(); i++) {
             Message currentMessage = mMessageList.get(i);
-            if (currentMessage.messageId.equals(removedMessage.messageId)) {
+            if (currentMessage.getMessageId().equals(removedMessage.getMessageId())) {
                 mMessageList.remove(currentMessage);
             }
         }
@@ -267,7 +267,7 @@ public class ChatroomActivity extends AppCompatActivity {
 
 
 
-    /* MIGHT USE LATER */
+    /* MIGHT USE LATER METHODS */
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

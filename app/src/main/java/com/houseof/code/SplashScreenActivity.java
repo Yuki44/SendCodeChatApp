@@ -1,28 +1,26 @@
 package com.houseof.code;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Fade;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Arrays;
-
 public class SplashScreenActivity extends AppCompatActivity {
+    private static final String TAG = "SplashScreenActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
+        if (auth.getCurrentUser() != null) { /* IF LOGGED IN */
             Intent intent = new Intent(this, ChatroomsListActivity.class);
-           startActivity(intent);
-           overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
-        } else {
+        } else { /* IF NOT LOGGED IN */
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

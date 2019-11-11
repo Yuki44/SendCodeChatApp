@@ -1,10 +1,10 @@
 package com.houseof.code;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,18 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.houseof.code.adapters.ChatroomsRecyclerAdapter;
 import com.houseof.code.models.Chatroom;
 import com.houseof.code.util.VerticalSpacingItemDecorator;
@@ -63,12 +58,10 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
         initRecyclerView();
         loadProfileImage();
         startListeningForChatrooms();
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mChatroomsRecyclerAdapter.notifyDataSetChanged();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            loadChatrooms();
+            mChatroomsRecyclerAdapter.notifyDataSetChanged();
+            mSwipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -83,7 +76,7 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
     }
 
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerViewWidget.setLayoutManager(linearLayoutManager);
         mRecyclerViewWidget.setHasFixedSize(true);
@@ -105,7 +98,7 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
 
     private void checkIfAuthenticated() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser == null){
+        if (currentUser == null) {
             Intent startIntent = new Intent(this, SplashScreenActivity.class);
             startActivity(startIntent);
             finish();
@@ -113,58 +106,50 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
         }
     }
 
+    //TODO /* REFACTOR TO DAL */
     private void loadChatrooms() {
         CollectionReference chatroomsCollectionRef = db
                 .collection("chatrooms");
 
         Query chatroomsQuery = null;
-        if(mLastQueriedDocument != null){
+        if (mLastQueriedDocument != null) {
             chatroomsQuery = chatroomsCollectionRef.startAfter(mLastQueriedDocument);
-        }
-        else{
+        } else {
             chatroomsQuery = chatroomsCollectionRef;
         }
 
-        chatroomsQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
+        chatroomsQuery.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
 
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Chatroom chatroom = document.toObject(Chatroom.class);
-                        mChatrooms.add(chatroom);
-                    }
-
-                    if(task.getResult().size() != 0){
-                        mLastQueriedDocument = task.getResult().getDocuments()
-                                .get(task.getResult().size() -1);
-                    }
-
-                    mChatroomsRecyclerAdapter.notifyDataSetChanged();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Chatroom chatroom = document.toObject(Chatroom.class);
+                    mChatrooms.add(chatroom);
                 }
-                else{
-                    Log.e(TAG, "onComplete: Failed", task.getException());
+
+                if (task.getResult().size() != 0) {
+                    mLastQueriedDocument = task.getResult().getDocuments()
+                            .get(task.getResult().size() - 1);
                 }
+
+                mChatroomsRecyclerAdapter.notifyDataSetChanged();
+            } else {
+                Log.e(TAG, "onComplete: Failed", task.getException());
             }
         });
     }
 
-    private void startListeningForChatrooms(){
+    private void startListeningForChatrooms() {
         loadChatrooms();
-        db.collection("chatrooms").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot snapshots,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if(e != null) {
-                            Log.d(TAG, "onEvent: An error has ocurred");
-                        }else {
-                            List<Chatroom> messages = snapshots.toObjects(Chatroom.class);
-                            mChatroomsRecyclerAdapter.setData(messages);
-                            mRecyclerViewWidget.smoothScrollToPosition(mChatroomsRecyclerAdapter.getItemCount());
+        db.collection("chatrooms").addSnapshotListener((snapshots, e) -> {
+            if (e != null) {
+                Log.d(TAG, "onEvent: An error has ocurred");
+            } else {
+                List<Chatroom> messages = snapshots.toObjects(Chatroom.class);
+                mChatroomsRecyclerAdapter.setData(messages);
+                mRecyclerViewWidget.smoothScrollToPosition(mChatroomsRecyclerAdapter.getItemCount());
 
-                        }
-                    }
-                });
+            }
+        });
     }
 
 
@@ -172,18 +157,19 @@ public class ChatroomsListActivity extends AppCompatActivity implements Chatroom
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       super.onCreateOptionsMenu(menu);
-getMenuInflater().inflate(R.menu.menu_logout, menu);
-       return true;
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-if(item.getItemId() == R.id.menuitem_logout){
-    FirebaseAuth.getInstance().signOut();
-    checkIfAuthenticated();
-} return true;
+        if (item.getItemId() == R.id.menuitem_logout) {
+            FirebaseAuth.getInstance().signOut();
+            checkIfAuthenticated();
+        }
+        return true;
     }
 
     @Override
@@ -197,7 +183,7 @@ if(item.getItemId() == R.id.menuitem_logout){
         Log.d(TAG, "onChatroomClick: clicked");
     }
 
-/* TESTING METHODS */
+    /* TESTING METHODS */
 
     /*  private void insertFakeChatrooms(){
         for (int i = 0; i < 1000; i++) {

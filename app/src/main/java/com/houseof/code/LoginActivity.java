@@ -1,4 +1,5 @@
 package com.houseof.code;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,14 +18,16 @@ import com.houseof.code.dal.DatabaseHelper;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 123;
     private static final String TAG = "LoginActivity";
+    private static final int RC_SIGN_IN = 123;
     private DatabaseHelper databaseHelper = new DatabaseHelper();
 
+
+    public LoginActivity() {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,10 +35,6 @@ public class LoginActivity extends AppCompatActivity  {
 
 
         createSignInIntent();
-    }
-
-
-    public LoginActivity() {
     }
 
     public void createSignInIntent() {
@@ -55,7 +54,6 @@ public class LoginActivity extends AppCompatActivity  {
 
     }
 
-
     //Handle the Auth result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -67,18 +65,21 @@ public class LoginActivity extends AppCompatActivity  {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 showToast(R.string.signed_in);
+
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 FirebaseUser user = auth.getCurrentUser();
                 databaseHelper.createNewUser(user.getDisplayName(), user.getPhotoUrl().toString(), user.getUid());
+
                 Intent intent = new Intent(this, ChatroomsListActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
-                // ...
+
             } else {
+
                 // Sign in failed
                 if (response == null) {
-                    // User pressed back button
+                    // If user pressed the back button:
                     finish();
                     return;
                 }
@@ -94,10 +95,8 @@ public class LoginActivity extends AppCompatActivity  {
         }
     }
 
-
-
     private void showToast(@StringRes int errorMessageRes) {
-        Toast.makeText(getBaseContext(),  errorMessageRes, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), errorMessageRes, Toast.LENGTH_SHORT).show();
     }
 
 

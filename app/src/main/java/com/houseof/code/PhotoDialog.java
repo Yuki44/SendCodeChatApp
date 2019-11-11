@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
@@ -25,10 +24,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class PhotoDialog extends DialogFragment {
+
     private static final String TAG = "PhotoDialog";
-    private ImageHandler imgHandler;
     private static final int CAMERA_REQUEST_CODE = 4321;
     private static final int PICKFILE_REQUEST_CODE = 1234;
+    private ImageHandler imgHandler;
     private String picturePath;
 
     public static Bitmap rotateImage(Bitmap src, float degree) {
@@ -44,19 +44,21 @@ public class PhotoDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_photo, container, false);
 
         imgHandler = new ImageHandler();
+
+        /* Use the camera buttons */
         TextView takePhoto = view.findViewById(R.id.dialogTakePhoto);
         takePhoto.setOnClickListener(v -> {
             Log.d(TAG, "onClick: starting camera.");
-            // TODO
+            // TODO /* Must implement with Camera 2 API */
         });
 
         ImageButton takePhotoImage = view.findViewById(R.id.take_photo_bttn);
         takePhotoImage.setOnClickListener(v -> {
             Log.d(TAG, "onClick: starting camera.");
-            // TODO
+            // TODO /* Must implement with Camera 2 API */
         });
 
-
+        /* Browse the gallery buttons */
         ImageButton selectPhotoImage = view.findViewById(R.id.chose_photo_bttn);
         selectPhotoImage.setOnClickListener(v -> {
             Log.d(TAG, "onClick: accessing phone memory.");
