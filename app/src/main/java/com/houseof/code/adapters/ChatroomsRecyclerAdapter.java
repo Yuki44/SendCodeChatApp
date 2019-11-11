@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ChatroomsRecyclerAdapter extends RecyclerView.Adapter<ChatroomsRecyclerAdapter.ViewHolder> {
 
+    private static final String TAG = "ChatroomsRecyclerAdapte";
     private List<Chatroom> mChatrooms;
     private OnChatroomListener mOnChatroomListener;
 
@@ -50,7 +51,7 @@ public class ChatroomsRecyclerAdapter extends RecyclerView.Adapter<ChatroomsRecy
        TextView chatroomTitle, chatroomDescription;
        OnChatroomListener onChatroomListener;
 
-        public ViewHolder(@NonNull View itemView, OnChatroomListener onChatroomListener) {
+        ViewHolder(@NonNull View itemView, OnChatroomListener onChatroomListener) {
             super(itemView);
             chatroomTitle = itemView.findViewById(R.id.chatroom_title);
             chatroomDescription = itemView.findViewById(R.id.chatroom_description);
