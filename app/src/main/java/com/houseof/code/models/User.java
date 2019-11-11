@@ -7,7 +7,8 @@ import java.util.Date;
 public class User {
     private String username;
     private String userAvatar;
-    private @ServerTimestamp Date userCreated;
+    private @ServerTimestamp
+    Date userCreated;
     private String userId;
 
     public User() {
@@ -20,7 +21,7 @@ public class User {
         this.userId = userId;
     }
 
-    /* GETTER SETTER */
+    /* GETTERS SETTERS */
 
     public String getUsername() {
         return username;
@@ -40,10 +41,6 @@ public class User {
 
     public Date getUserCreated() {
         return userCreated;
-    }
-
-    public void setUserCreated(Date userCreated) {
-        this.userCreated = userCreated;
     }
 
     public String getUserId() {

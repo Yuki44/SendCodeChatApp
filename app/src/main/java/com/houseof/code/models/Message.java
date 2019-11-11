@@ -8,12 +8,13 @@ import java.util.Date;
 
 @SuppressWarnings("WeakerAccess")
 public class Message {
+    private String messageId;
     private String messageText;
     private String messageSender;
     private String messageUsername;
-    private @ServerTimestamp Date messageTimestamp;
+    private @ServerTimestamp
+    Date messageTimestamp;
     private String senderAvatar;
-    public String messageId;
 
     public Message() {
     }
@@ -27,7 +28,7 @@ public class Message {
         this.messageId = messageId;
     }
 
-    /* GETTER SETTER */
+    /* GETTERS SETTERS */
 
     public String getMessageText() {
         return messageText;
@@ -57,10 +58,6 @@ public class Message {
         return messageTimestamp;
     }
 
-    public void setMessageTimestamp(Date messageTimestamp) {
-        this.messageTimestamp = messageTimestamp;
-    }
-
     public String getSenderAvatar() {
         return senderAvatar;
     }
@@ -76,6 +73,7 @@ public class Message {
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
+
     /* TO STRING */
 
     @Override

@@ -6,6 +6,17 @@ import android.os.Parcelable;
 
 
 public class Chatroom implements Parcelable {
+    public static final Creator<Chatroom> CREATOR = new Creator<Chatroom>() {
+        @Override
+        public Chatroom createFromParcel(Parcel in) {
+            return new Chatroom(in);
+        }
+
+        @Override
+        public Chatroom[] newArray(int size) {
+            return new Chatroom[size];
+        }
+    };
     private String chatroomTitle;
     private String chatroomDescription;
     private String chatroomPhoto;
@@ -21,7 +32,6 @@ public class Chatroom implements Parcelable {
     public Chatroom() {
     }
 
-
     public Chatroom(Parcel in) {
         chatroomTitle = in.readString();
         chatroomDescription = in.readString();
@@ -29,48 +39,20 @@ public class Chatroom implements Parcelable {
         chatroomId = in.readString();
     }
 
-    public static final Creator<Chatroom> CREATOR = new Creator<Chatroom>() {
-        @Override
-        public Chatroom createFromParcel(Parcel in) {
-            return new Chatroom(in);
-        }
-
-        @Override
-        public Chatroom[] newArray(int size) {
-            return new Chatroom[size];
-        }
-    };
-
     public String getChatroomTitle() {
         return chatroomTitle;
-    }
-
-    public void setChatroomTitle(String chatroomTitle) {
-        this.chatroomTitle = chatroomTitle;
     }
 
     public String getChatroomDescription() {
         return chatroomDescription;
     }
 
-    public void setChatroomDescription(String chatroomDescription) {
-        this.chatroomDescription = chatroomDescription;
-    }
-
     public String getChatroomPhoto() {
         return chatroomPhoto;
     }
 
-    public void setChatroomPhoto(String chatroomPhoto) {
-        this.chatroomPhoto = chatroomPhoto;
-    }
-
     public String getChatroomId() {
         return chatroomId;
-    }
-
-    public void setChatroomId(String chatroomId) {
-        this.chatroomId = chatroomId;
     }
 
     /* TO STRING */

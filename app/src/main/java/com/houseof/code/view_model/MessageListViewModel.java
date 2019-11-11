@@ -15,5 +15,4 @@ public class MessageListViewModel extends ViewModel {
     public interface MessageListRepository {
         MessageListLiveData getMessageListLiveData();
     }
-
 }
