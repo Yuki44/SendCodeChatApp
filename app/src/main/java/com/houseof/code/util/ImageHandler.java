@@ -7,14 +7,18 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.IOException;
 
 public class ImageHandler {
+
+    private static final String TAG = "ImageHandler";
+
+    // Gives the option to rotate an image
     public static Bitmap modifyOrientation(Bitmap bitmap, String image_absolute_path) throws IOException {
         ExifInterface ei = new ExifInterface(image_absolute_path);
         int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -45,7 +49,7 @@ public class ImageHandler {
         matrix.postRotate(degrees);
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
-
+    //or flip
     public static Bitmap flip(Bitmap bitmap, boolean horizontal, boolean vertical) {
         Matrix matrix = new Matrix();
         matrix.preScale(horizontal ? -1 : 1, vertical ? -1 : 1);
@@ -88,6 +92,7 @@ public class ImageHandler {
                     return cursor.getString(column_index);
                 }
             } catch (Exception e) {
+                Log.e(TAG, "getFilePath: ", e);
             }
         } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();

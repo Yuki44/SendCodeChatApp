@@ -13,7 +13,7 @@ public class VerticalSpacingItemDecorator extends RecyclerView.ItemDecoration {
     public VerticalSpacingItemDecorator(int verticalSpaceHeight) {
         this.verticalSpaceHeight = verticalSpaceHeight;
     }
-
+    // Given a height this class will set a vertical space between R.view items
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         outRect.bottom = verticalSpaceHeight;
