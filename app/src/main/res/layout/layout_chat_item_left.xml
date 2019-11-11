@@ -8,7 +8,7 @@
         android:id="@+id/user_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@color/colorAccent" />
+        android:src="@drawable/ic_user_no_photo" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -33,6 +33,7 @@
             android:layout_marginStart="5dp"
             android:background="@drawable/shape_background_left"
             android:fontFamily="@font/helvetica_neue_med"
+            android:textColor="@color/chatGray"
             android:padding="8dp"
             android:textSize="18sp" />
 
