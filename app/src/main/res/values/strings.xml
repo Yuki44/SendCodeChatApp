@@ -1,33 +1,32 @@
 <resources>
-    <string name="app_name" translatable="false">Send Code</string>
-    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
-    <string name="facebook_application_id" translatable="false">2545026675575747</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb2545026675575747</string>
-    <string name="click_to_open_messages">Click to open messages</string>
-    <string name="send_code">Send Code</string>
-    <string name="signed_in">Signed In</string>
-    <string name="sign_in_cancelled">The sign in was cancelled</string>
-    <string name="no_internet_connection">No internet connection available</string>
-    <string name="unknown_error">An unknown error has occurred</string>
-    <string name="title_activity_chat">ChatActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="unsubscribe_from_this_chat">Unsubscribe from this chat</string>
-    <string name="subscribe_to_chat">Yes, subscribe!</string>
-    <string name="cancel">Cancel, go back</string>
-    <string name="back_arrow">back arrow</string>
-    <string name="type_a_message">Type a message</string>
-    <string name="camera_icon">camera icon</string>
-    <string name="log_out">Log out</string>
-    <string name="send_message_button">Send Message Button</string>
-    <string name="add_image_button">Add Image Button</string>
-    <string name="added">added</string>
-    <string name="modified">modified</string>
-    <string name="removed">removed</string>
-    <string name="chatroom_id" />
-    <string name="choose_photo">Choose a photo</string>
-    <string name="take_a_new_photo">Take a photo</string>
-    <string name="photo_dialog">Photo dialog</string>
+<string name="app_name" translatable="false">Send Code</string>
+<!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+<string name="facebook_application_id" translatable="false">2545026675575747</string>
+<string name="fb_login_protocol_scheme" translatable="false">fb2545026675575747</string>
+<string name="click_to_open_messages">Click to open messages</string>
+<string name="send_code">Send Code</string>
+<string name="signed_in">Signed In</string>
+<string name="sign_in_cancelled">The sign in was cancelled</string>
+<string name="no_internet_connection">No internet connection available</string>
+<string name="unknown_error">An unknown error has occurred</string>
+<string name="title_activity_chat">ChatActivity</string>
+<string name="title_home">Home</string>
+<string name="title_dashboard">Dashboard</string>
+<string name="title_notifications">Notifications</string>
+<string name="unsubscribe_from_this_chat">Unsubscribe from this chat</string>
+<string name="subscribe_to_chat">Yes, subscribe!</string>
+<string name="cancel">Cancel, go back</string>
+<string name="back_arrow">back arrow</string>
+<string name="type_a_message">Type a message</string>
+<string name="camera_icon">camera icon</string>
+<string name="log_out">Log out</string>
+<string name="send_message_button">Send Message Button</string>
+<string name="add_image_button">Add Image Button</string>
+<string name="added">added</string>
+<string name="modified">modified</string>
+<string name="removed">removed</string>
+<string name="choose_photo">Choose a photo</string>
+<string name="take_a_new_photo">Take a photo</string>
+<string name="photo_dialog">Photo dialog</string>
 
 </resources>

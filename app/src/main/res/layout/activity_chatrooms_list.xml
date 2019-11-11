@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ChatroomsListActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -13,23 +13,23 @@
         android:layout_marginTop="55dp">
 
         <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/recyclerViewChatrooms"
-        android:padding="5dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:id="@+id/recyclerViewChatrooms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <include layout="@layout/snippet_toolbar_chatroom_list" />
     </RelativeLayout>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

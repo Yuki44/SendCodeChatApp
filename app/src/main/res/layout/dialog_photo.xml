@@ -8,56 +8,55 @@
     android:padding="5dp">
 
 
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <ImageButton
-        android:id="@+id/take_photo_bttn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:contentDescription="@string/add_image_button"
-        android:padding="15dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_camera"/>
-
-    <TextView
-        android:id="@+id/dialogTakePhoto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:fontFamily="@font/helvetica_neue_med"
-        android:text="@string/take_a_new_photo"
-        android:textColor="@color/black"
-        android:textSize="19sp" />
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/take_photo_bttn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:contentDescription="@string/add_image_button"
+            android:padding="15dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_camera" />
+
+        <TextView
+            android:id="@+id/dialogTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_neue_med"
+            android:text="@string/take_a_new_photo"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="19sp" />
 
 
-    <ImageButton
-        android:id="@+id/chose_photo_bttn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:contentDescription="@string/add_image_button"
-        android:padding="15dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_add_photo"
-        android:layout_marginTop="60dp"/>
+        <ImageButton
+            android:id="@+id/chose_photo_bttn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="60dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:contentDescription="@string/add_image_button"
+            android:padding="15dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_add_photo" />
 
-    <TextView
-        android:id="@+id/dialogChoosePhoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/helvetica_neue_med"
-        android:text="@string/choose_photo"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="19sp"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/dialogChoosePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_neue_med"
+            android:text="@string/choose_photo"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="19sp" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
